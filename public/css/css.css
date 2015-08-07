@@ -1,0 +1,14 @@
+.hand { 
+	cursor: pointer; cursor: hand; 
+}
+
+.imagePlaceholder {
+	width: 150px;
+	height: 150px;
+}
+
+.imageLarge {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
