@@ -12,5 +12,3 @@ app
 app.config([function () {
     console.log('Configuraiton...');
 }]);
-
-	

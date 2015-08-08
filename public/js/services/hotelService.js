@@ -9,4 +9,3 @@ app.factory('hotelService', function($http, $location) {
 		}
 	}
 });
-

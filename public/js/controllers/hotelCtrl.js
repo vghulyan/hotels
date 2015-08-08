@@ -35,42 +35,42 @@ app.controller('hotelCtrl', ['$scope', '$filter', '$modal', 'hotelService', func
 	}
 
 
-$scope.currentImageURL = "";
-$scope.loadImage = function (establishment) {
-    $scope.currentImageURL = establishment.ImageUrl;
-    $scope.imageName = establishment.Name;
-    $modal.open({
-        templateUrl: 'template/modalContent.html',
-        controller: 'modalController',
-        scope: $scope
-    })
-    .result.then(function() {
-        // closed
-    }, function() {
-        // canceled
-    });
-};
+    $scope.currentImageURL = "";
+    $scope.loadImage = function (establishment) {
+        $scope.currentImageURL = establishment.ImageUrl;
+        $scope.imageName = establishment.Name;
+        $modal.open({
+            templateUrl: 'template/modalContent.html',
+            controller: 'modalController',
+            scope: $scope
+        })
+        .result.then(function() {
+            // closed
+        }, function() {
+            // canceled
+        });
+    };
 
-function paginate() {
-    var begin = (($scope.currentPage - 1) * $scope.numPerPage);
-    var end = begin + $scope.numPerPage;
-    
-    $scope.establishments = $scope.establismentsCopy.slice(begin, end);
-    if(!$scope.establishments) {
-        $scope.currentPage = 1;
+    function paginate() {
+        var begin = (($scope.currentPage - 1) * $scope.numPerPage);
+        var end = begin + $scope.numPerPage;
+        
+        $scope.establishments = $scope.establismentsCopy.slice(begin, end);
+        if(!$scope.establishments) {
+            $scope.currentPage = 1;
+        }
     }
-}
 
-$scope.$watch('currentPage + numPerPage', function() {
-    paginate();    
-});
+    $scope.$watch('currentPage + numPerPage', function() {
+        paginate();    
+    });
 
-$scope.perPage = function() {
-    //console.log('per page ' );
-}
+    $scope.perPage = function() {
+        //console.log('per page ' );
+    }
 
 
-$scope.refresh();
+    $scope.refresh();
 
 }]);
 
