@@ -8,4 +8,3 @@ run the node server by typing in console:
 node server
 then point your borwser to:
 http://localhost:3000
-
