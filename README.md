@@ -1,7 +1,7 @@
 # Hotels
 
-How to Run
-Install node.js then install the express plugin
+How to Run\n
+Install node.js then install the express plugin<br />
 npm install express // this is required where to look for static folders
 
 run the node server by typing in console: 
