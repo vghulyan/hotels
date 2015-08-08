@@ -1,10 +1,12 @@
 # Hotels
-To run this application either open the index.html in a browser or run through a local server.
-If you are running a node js server make sure you've installed the required modules,
 
-npm install express // checks where to look our index.html
+How to Run
+Install node.js then install the express plugin
+npm install express // this is required where to look for static folders
 
-If you are running using node then go to your browser and type
+run the node server by typing in console: 
+node server
+then point your borwser to:
 http://localhost:3000
-otherwise open the index.html in your browser
+
 

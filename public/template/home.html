@@ -1,10 +1,15 @@
 <div class="container">
 	<h1>Hotels</h1>
 	<div class="row">
-  		<div class="col-xs-6 col-md-4"><button class="btn btn-default" type="submit" ng-click="readData()">Refresh</button></div>
-  		<div class="col-xs-6 col-md-6">
-    		<input type="text" ng-model="search.$" placeholder="Global Search" ng-show="establishments">
-    		<span class="label">Ordered By: {{orderByField}}, Reverse Sort: {{reverseSort}}</span>
+  		<div class="col-xs-6 col-md-2"><button class="btn btn-default" type="submit" ng-click="refresh()">Refresh</button></div>
+  		<div class="col-xs-6 col-md-8" ng-show="establishments">
+	  		<div class="input-group input-group-sm add-on">
+	          <input type="text" class="form-control search-query" ng-model="search.$" placeholder="Global Search">
+	          <div class="input-group-btn">
+	            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+	          </div>
+	        </div>
+    		
     	</div>
     	<div class="col-xs-6 col-md-2">
     		<p>{{ msgtxt }}</p>
@@ -14,46 +19,75 @@
 
 	<div ng-show="establishments">
 
-		<h2>Establishments</h2>		
+		<div class="row">
+			<h2 class="col-xs-6 col-md-4">Establishments</h2>
+			
+			<pagination 
+		      ng-model="currentPage"
+		      total-items="establismentsCopy.length"
+		      max-size="maxSize"  
+		      boundary-links="true"
+		      rotate="false"
+		      class="pagination-sm col-xs-6 col-md-6">
+		    </pagination>
+
+			<h2 class="col-md-2">
+				<select class="form-control input-sm pull-right" ng-model="numPerPage" ng-change="perPage()" ng-options="('show '+size+' per page') for size in pageSizes"></select>
+      		</h2>
+		</div>
+
 		<div>			
 			<table class="table">
 				<thead>
 					<tr>
 						<td>ID</td>
 						
-						<td class="hand" ng-click="sortOrderBy('Distance', !reverseSort)">Distance <span ng-show="!reverseSort"> v</span><span ng-show="reverseSort"> ^</span></span></td>
+						<td class="hand" ng-click="sortOrderBy('Distance')">Distance <span ng-show="!reverseSort"> v</span><span ng-show="reverseSort"> ^</span></span></td>
 
 						<td>Type</td>
 						
-						<td>Image</td>
+						<td>&nbsp;</td>
 
-						<td class="hand" ng-click="sortOrderBy('MinCost', !reverseSort)">Min Cost<span ng-show="!reverseSort"> v</span><span ng-show="reverseSort"> ^</span></span></td>
+						<td class="hand" ng-click="sortOrderBy('MinCost')">Min Cost<span ng-show="!reverseSort"> v</span><span ng-show="reverseSort"> ^</span></span></td>
 
 						<td>Name</td>
-						<td class="hand" ng-click="sortOrderBy('Stars', !reverseSort)">Stars<span ng-show="!reverseSort"> v</span><span ng-show="reverseSort"> ^</span></span></td>
+						<td class="hand" ng-click="sortOrderBy('Stars')">Stars<span ng-show="!reverseSort"> v</span><span ng-show="reverseSort"> ^</span></span></td>
 												
-						<td class="hand" ng-click="sortOrderBy('UserRating', !reverseSort)">Rating<span ng-show="!reverseSort"> v</span><span ng-show="reverseSort"> ^</span></span></td>
+						<td class="hand" ng-click="sortOrderBy('UserRating')">Rating<span ng-show="!reverseSort"> v</span><span ng-show="reverseSort"> ^</span></span></td>
 						
 						<td>Rating Count</td>
 						<td>Title</td>
 					</tr>
 					<tr>
 					<tr>
+						<td colspan="4"><span ng-show="headerOrderByClicked">Ordered By: {{orderByField}}, Reverse Sort: {{!reverseSort}}</span></td>
+						<!--td>&nbsp;</td>
 						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
+						<td>&nbsp;</td-->
 						<td><input ng-model="search.MinCost"></td>
 						<td><input ng-model="search.Name"></td>
-						<td><input ng-model="search.Stars"></td>
-						<td><input ng-model="search.UserRating"></td>
+						
+						<td>
+							<span  class="nullable">
+								<select ng-model="search.Stars" ng-options="dd.Stars as dd.Stars for dd in establishments | unique:'Stars'">
+								</select>
+							</span>
+						</td>
+
+						<td>
+							<!--input ng-model="search.UserRating"-->
+							<span  class="nullable">
+								<select ng-model="search.UserRating" ng-options="dd.UserRating as dd.UserRating for dd in establishments | unique:'UserRating'">
+								</select>
+							</span>
+						</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 					</tr>
 				</thead>
+
 				<tbody>
 					<tr ng-repeat="establishment in establishments | filter:search:strict | orderBy:orderByField:reverseSort">
-
 						<td>{{establishment.EstablishmentId}}</td>
 						<td>{{establishment.Distance}}</td>
 						<td>{{establishment.EstablishmentType}}</td>
@@ -65,7 +99,6 @@
 						<td>{{establishment.UserRating}}</td>
 						<td>{{establishment.UserRatingCount}}</td>
 						<td>{{establishment.UserRatingTitle}}</td>
-
 					</tr>
 				</tbody>
 				
