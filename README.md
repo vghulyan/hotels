@@ -8,3 +8,5 @@ run the node server by typing in console: <br />
 <em>node server</em><br />
 then point your borwser to:<br />
 http://localhost:3000<br />
+
+<img src="public/img/screenshot.jpg">
